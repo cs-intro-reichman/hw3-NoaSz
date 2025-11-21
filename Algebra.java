@@ -25,43 +25,117 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int s = x1;
+		if (x2 >= 0) {
+			for (int i = 0; i < x2; i++) {
+			s++;
+		}
+	} else {
+		for (int i = 0; i > x2; i--) {
+			s--;
+		}}
+		return s; 
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int s = x1;
+		if (x2 >= 0) {
+			for (int i = 0; i < x2; i++) {
+			s--;
+		}
+	} else {
+		for (int i = 0; i > x2; i--) {
+			s++;
+		}}
+		return s;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int result = 0;
+
+    // si x2 est positif, on ajoute x1 → x2 fois
+    if (x2 >= 0) {
+        for (int i = 0; i < x2; i++) {
+            result = plus(result, x1);
+        }
+    } 
+    // si x2 est négatif, on ajoute (-x1) → |x2| fois
+    else {
+        for (int i = 0; i > x2; i--) {
+            result = plus(result, -x1);
+        }
+    }
+
+		return result;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		 int result = 1; // toute puissance commence par 1
+
+    for (int i = 0; i < n; i++) {
+        result = times(result, x); // multiplie result par x à chaque itération
+    }
+		return result;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		 if (x2 == 0) {
+        throw new ArithmeticException("Division par zéro");
+    }
+
+    // Travailler avec valeurs positives
+    int dividend = x1;
+    int divisor = x2;
+
+    if (dividend < 0) dividend = minus(0, dividend);
+    if (divisor < 0) divisor = minus(0, divisor);
+
+    int quotient = 0;
+    int sum = 0;
+
+    // On ajoute le divisor autant de fois que possible sans dépasser dividend
+    while (plus(sum, divisor) <= dividend) {
+        sum = plus(sum, divisor);
+        quotient++;
+    }
+
+    // Si les signes initiaux étaient différents, on rend le résultat négatif
+    if ((x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0)) {
+        quotient = minus(0, quotient);
+    }
+		return quotient;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		return minus (x1,times(x2,div(x1,x2))) ;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
-	}	  	  
+		int i = 0;
+		
+		while (true) {
+			// Calculate square using your times function
+			int square = times(i, i);
+	
+			// Check if we found the exact root
+			if (square == x) {
+				return i;
+			}
+			
+			// Check if we went too far
+			if (square > x) {
+				return i - 1; // Return the previous number
+			}
+			
+			i++;
+		}
+	}
 }
+
+	
