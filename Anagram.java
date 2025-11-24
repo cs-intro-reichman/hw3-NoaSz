@@ -29,36 +29,34 @@ public class Anagram {
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
 		str1 = preProcess(str1);
-		str2 = preProcess(str2); // Use str2 as our "mutable" pool
+		str2 = preProcess(str2); 
 
 		if (str1.length() != str2.length()) {
 			return false;
 		}
 
-		// Loop through every character in the first string
 		for (int i = 0; i < str1.length(); i++) {
 
 			char c = str1.charAt(i);
 
-			// Step 1: Find the character in str2
+			
 			int index = -1;
 			for (int j = 0; j < str2.length(); j++) {
 				if (str2.charAt(j) == c) {
 					index = j;
-					break; // Stop looking once we find the first match
+					break; 
 				}
 			}
 
-			// Step 2: Check if found
 			if (index != -1) {
 				str2 = str2.substring(0, index) + str2.substring(index + 1);
 			} else {
-				// NOT FOUND: If a character from str1 is missing in str2, it's not an anagram.
+				
 				return false;
 			}
 		}
 
-		// If we finished the loop, every character was matched and removed.
+		
 		return true;
 	}
 	   
@@ -78,37 +76,21 @@ public static String preProcess(String str) {
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// 1. Preprocess the string (though for random anagrams, often just the
-		// original string is used; we'll assume the goal is just to shuffle the input
-		// characters).
-		// If str needs to be cleaned first, call preProcess(str) here.
-
-		// We will use the input string 'str' as our mutable pool by overwriting
-		// the variable with a new string in each iteration.
 		String mutablePool = str;
 		String randomAna = "";
 
-		// 2. Loop N times (once for every character we need to pick)
-		// The loop condition must use the ORIGINAL length of the string, NOT the
-		// mutablePool length.
 		for (int i = 0; i < str.length(); i++) {
 
-			// 3. Generate a random index based on the CURRENT size of the mutablePool
-			// We ensure the index is between 0 and mutablePool.length() - 1.
+			
 			int randomIndex = (int) (Math.random() * mutablePool.length());
 
-			// 4. Get the character at the random index and append it to the result
 			char randomChar = mutablePool.charAt(randomIndex);
 			randomAna += randomChar;
 
-			// 5. CRITICAL: Remove the chosen character by creating a NEW string
-			// Part 1: All characters from the start (index 0) up to the random index
 			String part1 = mutablePool.substring(0, randomIndex);
 
-			// Part 2: All characters starting AFTER the random index
 			String part2 = mutablePool.substring(randomIndex + 1);
 
-			// Reassign the pool to the new, shorter string (the deletion)
 			mutablePool = part1 + part2;
 		}
 
