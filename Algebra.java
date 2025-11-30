@@ -2,7 +2,12 @@
 // the Java operations a + b, a - b, a * b, a / b, a % b, and without calling 
 // Math.sqrt. All the functions in this class operate on int values and
 // return int values.
-
+/*
+Feedback:
+very clean code in terms of indentations, however some variable names
+are not very descriptive
+for example "s" is not a great variable name as it tells me nothing about what that 
+variable is meant to represent */
 public class Algebra {
 	public static void main(String args[]) {
 	    // Tests some of the operations
