@@ -1,3 +1,4 @@
+// also very nice!
 public class LoanCalc {
 	static double epsilon = 0.001;  
 	static int iterationCounter;   
